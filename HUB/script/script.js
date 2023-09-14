@@ -3,13 +3,13 @@ const credits = document.getElementById('credits');
 
 const listHacks = [
 	{
-		name: 'UŁAMKI',
-		desc: 'Dodaj ułamki',
+		name: 'RÓWNANIA',
+		desc: 'Rozwiąż równania',
 		link: 'game1',
 	},
 	{
-		name: 'RÓWNANIA',
-		desc: 'Rozwiąż równania',
+		name: 'UŁAMKI',
+		desc: 'Dodaj ułamki',
 		link: 'game2',
 	}
 ];
