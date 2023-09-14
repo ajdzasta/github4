@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+		<title>Math</title>
+
+		<link rel="stylesheet" href="files/style.css">
+		<script src="files/script.js" defer=""></script>
+		<script src="files/api.js" defer=""></script>
+	<link id="chromealerabat-link" rel="stylesheet" type="text/css" href="chrome-extension://dacdinoicboceafielngnmjjplncljhj/content.css"></head>
+	<body>
+		<div class="container">
+			<div class="box">
+				<div class="hackStart" id="buttonStart">Zacznij Rozwiązywać</div>
+
+				<div class="hackInfo" style="display: none">
+					<h2 id="textInfo"></h2>
+				</div>
+
+				<div class="hackText" style="display: none">
+					<h2 id="textInfo">Rozwiąż równania</h2>
+					<h2 id="timer"></h2>
+				</div>
+
+				<div class="resultscreen" style="display: none; text-align: center;">
+					<h1>Koniec gry!</h1>
+					<br></br>
+					<h2 style="font-size: 25px" id="endInfo">Otrzymane punkty:</h2>
+					<h2 style="font-size: 25px" id="endInfo2">Suma punktów:</h2>
+				</div>
+
+				<div class="wrapper" style="display: none">
+					<div></div>
+					<input class="result" disabled="" id="R0">
+					<div></div>
+					<input class="result" disabled="" id="R1">
+					<div></div>
+					<input class="result" disabled="" id="R2">
+					<div></div>
+					<input class="result" disabled="" id="R3">
+					<input type="text" class="input" id="I0">
+					<input type="text" class="op" disabled="" id="O0">
+					<input type="text" class="input" id="I1">
+					<input type="text" class="op" disabled="" id="O1">
+					<input type="text" class="input" id="I2">
+					<input class="result" disabled="" id="R4">
+					<div></div>
+					<input type="text" class="op" disabled="" id="O2">
+					<div></div>
+					<input type="text" class="op" disabled="" id="O3">
+					<div></div>
+					<input type="text" class="op" disabled="" id="O4">
+					<div></div>
+					<input class="result" disabled="" id="R5">
+					<input type="text" class="input" id="I3">
+					<input type="text" class="op" disabled="" id="O5">
+					<input type="text" class="input" id="I4">
+					<input type="text" class="op" disabled="" id="O6">
+					<input type="text" class="input" id="I5">
+					<input class="result" disabled="" id="R6">
+					<div></div>
+					<input type="text" class="op" disabled="" id="O7">
+					<div></div>
+					<input type="text" class="op" disabled="" id="O8">
+					<div></div>
+					<input type="text" class="op" disabled="" id="O9">
+					<div></div>
+					<input class="result" disabled="" id="R7">
+					<input type="text" class="input" id="I6">
+					<input type="text" class="op" disabled="" id="O10">
+					<input type="text" class="input" id="I7">
+					<input type="text" class="op" disabled="" id="O11">
+					<input type="text" class="input" id="I8">
+					<input class="result" disabled="" id="R8">
+					<div></div>
+					<input class="result" disabled="" id="R9">
+					<div></div>
+					<input class="result" disabled="" id="R10">
+					<div></div>
+					<input class="result" disabled="" id="R11">
+					<div></div>
+				</div>
+				<div class="buttons" style="display: none">
+					<button id="confirm">Potwierdź</button>
+					<button id="clear">Wyczyść</button>
+				</div>
+				<div class="hackFooter">
+					<div id="progressBox" style="display: none">
+						<div class="progressBox">
+							<div class="progressBar" id="progress-bar"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
