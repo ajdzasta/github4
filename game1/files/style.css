@@ -18,31 +18,34 @@ body {
 }
 
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 20px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	margin-top: 0px;
-	position: relative;
-	align-content: center;
-	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-top: 0px;
+    position: relative;
+    flex-direction: column;
+    height: 100%;
+    -webkit-filter: saturate(1.5);
+    filter: saturate(1.5)
 }
 
 .container .box {
-	width: 90%;
-	max-width: 720px;
-	height: 85%;
-	max-height: 85%;
-	background-color: #0e0e0e;
-	padding: 10px;
+    width: min(720px, 90vw);
+    height: min(720px, 80vh);
+    background-color: #0e0e0e;;
+    padding: 10px 10px 30px 10px;
+    border-radius: 30px;
+    position: relative;
 }
 
 .container .box .top-buttons {
     display: flex;
+    margin-top: 10px;
 }
 
 .container .box .top-buttons .hackStart {
@@ -121,13 +124,12 @@ body {
     text-align: center;
     color: #fff;
     flex-direction: column;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .container .box .hackText h2 {
     font-size: 16px;
     font-weight: 600;
-    margin-top: 30px
 }
 
 .container .box .hackText h3 {
@@ -140,10 +142,10 @@ body {
     color: #fff;
     display: grid;
     grid-gap: 4%;
-    grid-template-columns: repeat(7, min(7vw, 50px));
-    grid-template-rows: repeat(7, min(7vw, 50px));
+    grid-template-columns: repeat(7, min(7vw, 40px));
+    grid-template-rows: repeat(7, min(7vw, 40px));
     justify-content: center;
-    height: min(70vw, 500px);
+    height: min(70vw, 400px);
 }
 
 .result,
@@ -153,7 +155,7 @@ body {
 	align-items: center;
 	color: #fff;
 	display: flex;
-	font-size: clamp(5px, 3vw, 22px);
+	font-size: clamp(5px, 3vw, 20px);
 	justify-content: center;
 	text-align: center;
 }
@@ -278,7 +280,10 @@ a .home:hover {
     max-width: 720px;
     width: 90%;
     position: absolute;
-    bottom: 70px
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: 30px;
 }
 
 .container .box .hackFooter .progressBox {
@@ -291,8 +296,6 @@ a .home:hover {
 .container .box .hackFooter .progressBox .progressBar {
     height: 4px;
     background-color: #10ffcd;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px
 }
 
 .container .box .hackFunction2 textarea {
