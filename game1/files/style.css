@@ -41,7 +41,12 @@ body {
 	padding: 10px;
 }
 
-.container .box .hackStart {
+.container .box .top-buttons {
+    display: flex;
+}
+
+.container .box .top-buttons .hackStart {
+    width: 90%;
     margin-bottom: 20px;
     display: flex;
     border: none !important;
@@ -57,7 +62,7 @@ body {
     transition: all .2s
 }
 
-.container .box .hackStart:hover {
+.container .box .top-buttons .hackStart:hover {
     background-color: #23003c
 }
 
@@ -252,50 +257,24 @@ body {
 }
 
 a .home {
-	z-index: 5;
-	position: fixed;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	left: -150px;
-	-webkit-animation: animation-left-author 1s cubic-bezier(0.55, 0.5, 0.45, 0.5) forwards;
-	animation: animation-left-author 1s cubic-bezier(0.55, 0.5, 0.45, 0.5) forwards;
-	-webkit-animation-delay: -0.5s;
-	animation-delay: -0.5s;
-	top: 15px;
-	width: 32px;
-	height: 32px;
-	border-radius: 0 5px 5px 0px;
-	background-color: rgba(38 38 38);
+	width: 47px;
+	height: 47px;
+	border-radius: 5px 5px 5px 5px;
+	background-color: #0f0028;
 	color: #aaa;
 	cursor: pointer;
-	border-left: 1px solid rgba(16 255 205 / 20%);
-	text-shadow: 0 0 3px #aaa;
-	opacity: 0.8;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-}
-
-a .home::before {
-	content: '';
-	position: absolute;
-	height: 100%;
-	width: 2px;
-	background-color: rgba(16 255 205 / 70%);
-	left: -5px;
-	top: 0px;
-	-webkit-filter: blur(3px);
-	filter: blur(3px);
-	-webkit-animation: animation-left-author-blur 5s linear infinite;
-	animation: animation-left-author-blur 5s linear infinite;
+    margin-right: min(2vw, 10px);
 }
 
 a .home:hover {
-	opacity: 1;
-	color: #fff;
-	text-shadow: 0 0 3px #fff;
+    background-color: #23003c
 }
 
 .container .box .hackFooter {
