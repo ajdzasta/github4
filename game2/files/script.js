@@ -23,6 +23,16 @@ const register = document.querySelector(".register");
 const username = document.getElementById("username");
 const userid = document.getElementById("userid");
 
+let vh = window.innerHeight;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+window.addEventListener('resize', () => {
+  let vh = window.innerHeight;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+  levelHack.textContent = vh;
+  console.log(vh);
+});
+
 var __timePlay = 3000;
 var progressBarInterval;
 var stageLevel = 0;
