@@ -30,18 +30,20 @@ var check = false;
 
 const gameInit = () => {
 
-	const cookie = document.cookie;
-	let check2 = false;
-	if (cookie != ""){
-		username.innerHTML = "username: " + getCookie("username");
-		userid.innerHTML = "userid: " + getCookie("userid");
-		check2 = true;
-		console.log(cookie);
-	}
+	//const cookie = document.cookie;
+	//let check2 = false;
 
-	if (cookie == ""){
-		register.style.display = "";
-	}
+	let check2 = true;
+	//if (cookie != ""){
+	//	username.innerHTML = "username: " + getCookie("username");
+	//	userid.innerHTML = "userid: " + getCookie("userid");
+	//	check2 = true;
+	//	console.log(cookie);
+	//}
+
+	//if (cookie == ""){
+	//	register.style.display = "";
+	//}
 
 	buttonConfirm.addEventListener('click', function () {
 		if (check2){
