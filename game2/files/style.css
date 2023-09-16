@@ -18,53 +18,27 @@ body {
 }
 
 a .home {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    -webkit-animation: animation-left-author 1s cubic-bezier(0.55, 0.5, 0.45, 0.5) forwards;
-    animation: animation-left-author 1s cubic-bezier(0.55, 0.5, 0.45, 0.5) forwards;
-    -webkit-animation-delay: -0.5s;
-    animation-delay: -0.5s;
-    top: 15px;
-    width: 32px;
-    height: 32px;
-    border-radius: 0 5px 5px 0px;
-    background-color: #0a0020;
-    color: #aaa;
-    cursor: pointer;
-    border-left: 1px solid #6000ff;
-    text-shadow: 0 0 3px #aaa;
-    opacity: .8;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none
-}
-
-a .home::before {
-    content: "";
-    height: 100%;
-    width: 2px;
-    background-color: #6000ff;
-    left: -5px;
-    top: 0px;
-    -webkit-filter: blur(3px);
-    filter: blur(3px);
-    -webkit-animation: animation-left-author-blur 5s linear infinite;
-    animation: animation-left-author-blur 5s linear infinite
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 47px;
+	height: 47px;
+	border-radius: 5px 5px 5px 5px;
+	background-color: #0f0028;
+	color: #ffffff;
+	cursor: pointer;
+	user-select: none;
+    transition: all .2s
 }
 
 a .home:hover {
-    opacity: 1;
-    color: #fff;
-    text-shadow: 0 0 3px #fff
+    background-color: #23003c
 }
 
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     margin: 20px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -72,19 +46,27 @@ a .home:hover {
     user-select: none;
     margin-top: 0px;
     position: relative;
-    align-content: center;
-    height: 100%
+    flex-direction: column;
+    height: 100%;
+    -webkit-filter: saturate(1.5);
+    filter: saturate(1.5)
 }
 
 .container .hackBox {
-    width: 720px;
-    height: 820px;
-    background-color: #0a0020;
-    padding: 10px;
-    position: relative
+    width: min(720px, 90vw);
+    height: min(720px, 80vh);
+    background-color: #0e0e0e;;
+    padding: 10px 10px 30px 10px;
+    border-radius: 30px;
+    position: relative;
 }
 
-.container .hackBox .buttons .hackStart {
+.container .hackBox .top-buttons {
+    display: flex;
+    margin-top: 10px;
+}
+
+.container .hackBox .top-buttons .hackStart {
     width: 90%;
     margin-bottom: 20px;
     display: flex;
@@ -101,8 +83,8 @@ a .home:hover {
     transition: all .2s
 }
 
-.container .hackBox .buttons{
-    display: flex;
+.container .hackBox .top-buttons .hackStart:hover {
+    background-color: #23003c
 }
 
 .container .hackBox .hackFunction2 .hackConfirm {
@@ -202,9 +184,9 @@ a .home:hover {
     grid-template-rows: repeat(5, auto);
     place-items: center;
     gap: 0px;
-    width: 550px;
+    max-width: 550px;
     margin: 0 auto;
-    margin-top: 280px;
+    margin-top: 100px;
     z-index: 2;
     color: #fff;
     font-size: 18px;
@@ -274,9 +256,13 @@ a .home:hover {
 }
 
 .container .hackBox .hackFooter {
-    width: 720px;
+    max-width: 720px;
+    width: 90%;
     position: absolute;
-    bottom: 10px
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: 30px;
 }
 
 .container .hackBox .hackFooter .progressBox {
@@ -289,8 +275,6 @@ a .home:hover {
 .container .hackBox .hackFooter .progressBox .progressBar {
     height: 4px;
     background-color: #10ffcd;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px
 }
 
 .container .hackBox .hackFunction2 textarea {

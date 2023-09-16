@@ -23,7 +23,7 @@ const register = document.querySelector(".register");
 const username = document.getElementById("username");
 const userid = document.getElementById("userid");
 
-var __timePlay = 30;
+var __timePlay = 3000;
 var progressBarInterval;
 var stageLevel = 0;
 var check = false;
