@@ -14,7 +14,7 @@
 
 body {
     background-color: #000;
-    height: 100vh
+    height: calc(100vh - var(--vh));
 }
 
 a .home {

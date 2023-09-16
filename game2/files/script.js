@@ -23,6 +23,14 @@ const register = document.querySelector(".register");
 const username = document.getElementById("username");
 const userid = document.getElementById("userid");
 
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+window.addEventListener('resize', () => {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
 var __timePlay = 3000;
 var progressBarInterval;
 var stageLevel = 0;
