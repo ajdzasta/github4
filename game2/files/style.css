@@ -54,7 +54,7 @@ a .home:hover {
 
 .container .hackBox {
     width: min(720px, 90vw);
-    height: min(720px, calc(0.8 * var(--vh)));
+    height: min(720px, calc(0.9 * var(--vh)));
     background-color: #0e0e0e;;
     padding: 10px 10px 30px 10px;
     border-radius: 30px;
