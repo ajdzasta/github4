@@ -15,6 +15,9 @@ const buttons = document.querySelector(".buttons");
 const inputs = document.querySelectorAll('.input');
 const operators = document.querySelectorAll('.op');
 
+let vh = window.innerHeight;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
 var __timePlay = 100;
 var progressBarInterval;
 var check = false;
