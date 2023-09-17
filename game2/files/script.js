@@ -141,25 +141,25 @@ const gameOver = async() => {
 	hackFunction2.style.display = 'none';
 	hackText.style.display = 'none';
 	result.style.display = 'none';
-	resultInfo.innerHTML = 'Wynik: ' + (stageLevel - 1) + " pkt";
+	resultInfo.innerHTML = 'Zdobyte punkty: ' + (stageLevel - 1) + " pkt";
 
-	const highest_score = getCookie("score");
+	//const highest_score = getCookie("score");
 
-	if ((stageLevel - 1) > highest_score){
-		resultInfo2.innerHTML = 'Największy wynik: ' + (stageLevel - 1) + " pkt";
-
-		var date = new Date();
-		date.setFullYear(date.getFullYear() + 10); // Ustawiamy datę na 10 lat w przyszłości
-		
-		const editCookie = "score=" + (stageLevel - 1) + "; expires=" + date.toUTCString() + "; path=/";
-		document.cookie = editCookie;
-		const id = getCookie("userid")
-		const update = await updateScore(id,(stageLevel - 1));
-		console.log(update);
-	}
-	else{
-		resultInfo2.innerHTML = 'Największy wynik: ' + highest_score + " pkt";
-	}
+	//if ((stageLevel - 1) > highest_score){
+	//	resultInfo2.innerHTML = 'Największy wynik: ' + (stageLevel - 1) + " pkt";
+	//
+	//	var date = new Date();
+	//	date.setFullYear(date.getFullYear() + 10); // Ustawiamy datę na 10 lat w przyszłości
+	//	
+	//	const editCookie = "score=" + (stageLevel - 1) + "; expires=" + date.toUTCString() + "; path=/";
+	//	document.cookie = editCookie;
+	//	const id = getCookie("userid")
+	//	const update = await updateScore(id,(stageLevel - 1));
+	//	console.log(update);
+	//}
+	//else{
+	//	resultInfo2.innerHTML = 'Największy wynik: ' + highest_score + " pkt";
+	//}
 
 	register.style.display = 'none';
 	progressBarStart('end', 2);

@@ -72,7 +72,7 @@ const gameOver = async() => {
 	buttons.style.display = 'none';
 	hackText.style.display = 'none';
 	resultscreen.style.display = 'none';
-	document.getElementById("endInfo").innerHTML = "Otrzymane punkty: 0";
+	document.getElementById("endInfo").innerHTML = "Otrzymane punkty: 0 pkt";
 
 	progressBarStart('end', 2);
 };
@@ -85,7 +85,7 @@ const gameWin = async() => {
 	buttons.style.display = 'none';
 	hackText.style.display = 'none';
 	resultscreen.style.display = 'none';
-	document.getElementById("endInfo").innerHTML = "Otrzymane punkty: 10";
+	document.getElementById("endInfo").innerHTML = "Otrzymane punkty: 10 pkt";
 
 	progressBarStart('end', 2);
 };
