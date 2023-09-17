@@ -26,7 +26,7 @@ const userid = document.getElementById("userid");
 let vh = window.innerHeight;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-var __timePlay = 3000;
+var __timePlay = 300;
 var progressBarInterval;
 var stageLevel = 0;
 var check = false;
@@ -166,6 +166,7 @@ const gameOver = async() => {
 };
 
 function progressBarStart(type, time) {
+	let start = new Date().getTime();
 	var maxwidth = 1000;
 	var width = maxwidth;
 	const process = () => {
@@ -173,6 +174,18 @@ function progressBarStart(type, time) {
 			if (type == 'start' || type == 'end') width = width - 3;
 			else width--;
 			progressBarId.style.width = (width * 100.0) / maxwidth + '%';
+
+			let now = new Date().getTime();
+  			let distance = start + time*1000 - now;
+			//console.log(distance);
+
+  			// Time calculations for days, hours, minutes and seconds
+  			let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  			let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  			// Display the result in the element with id="demo"
+  			document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+
 		} else {
 			if (type == 'start') {
 				hackFunction.style.display = '';

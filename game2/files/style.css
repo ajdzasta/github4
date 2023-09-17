@@ -157,19 +157,17 @@ a .home:hover {
 }
 
 .container .hackBox .hackText {
-    display: flex;
+    display: block;
     justify-content: space-around;
-    transform: translateY(100%);
     text-align: center;
     color: #fff;
     flex-direction: column;
-    margin-top: -20px
+    margin-bottom: 20px;
 }
 
 .container .hackBox .hackText h2 {
     font-size: 16px;
     font-weight: 600;
-    margin-top: 30px
 }
 
 .container .hackBox .hackText h3 {
