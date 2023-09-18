@@ -26,7 +26,7 @@ const userid = document.getElementById("userid");
 let vh = window.innerHeight;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-var __timePlay = 300;
+var __timePlay = 30;
 var progressBarInterval;
 var stageLevel = 0;
 var check = false;

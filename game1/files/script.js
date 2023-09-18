@@ -18,7 +18,7 @@ const operators = document.querySelectorAll('.op');
 let vh = window.innerHeight;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-var __timePlay = 100;
+var __timePlay = 600;
 var progressBarInterval;
 var check = false;
 
