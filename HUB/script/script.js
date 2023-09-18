@@ -11,6 +11,11 @@ const listHacks = [
 		name: 'UŁAMKI',
 		desc: 'Dodaj ułamki',
 		link: 'game2',
+	},
+	{
+		name: 'LICZBY PIERWSZE',
+		desc: 'znajdź liczbę',
+		link: 'game3',
 	}
 ];
 
