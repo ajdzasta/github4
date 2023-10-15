@@ -109,7 +109,18 @@ function progressBarStart(type, time) {
   			let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   			// Display the result in the element with id="demo"
-  			document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+  			if (distance > 0){
+				if (minutes > 0 && seconds == 0){
+					document.getElementById("timer").innerHTML = minutes + "m "
+				}
+				else if (minutes > 0){
+  					document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+				}
+				else{
+					document.getElementById("timer").innerHTML = seconds + "s ";
+				}
+			}
+
 
 		} else {
 			if (type == 'start') {

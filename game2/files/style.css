@@ -87,6 +87,32 @@ a .home:hover {
     background-color: #23003c
 }
 
+.container .hackBox .startinfo .levelbuttons .level {
+    width: 90%;
+    margin-bottom: 20px;
+    margin-right: 3%;
+    margin-left: 3%;
+    display: flex;
+    border: none ;
+    background-color: #0f0028;
+    padding: 15px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+    justify-content: space-around;
+    transition: all .2s
+}
+
+.container .hackBox .startinfo .levelbuttons .level:hover {
+    background-color: #23003c
+}
+
+.container .hackBox .startinfo .levelbuttons {
+    display: flex;
+}
+
 .container .hackBox .hackFunction2 .hackConfirm {
     margin-bottom: 20px;
     display: flex;
@@ -201,10 +227,6 @@ a .home:hover {
     padding-top: auto;
     padding-bottom: auto;
     border: 1px solid #383838
-}
-
-.container .hackBox .hackFunction .boxNumber .green {
-    color: #10ffcd
 }
 
 .container .hackBox .hackFunction2 {

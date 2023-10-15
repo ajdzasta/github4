@@ -12,7 +12,8 @@ const upF1 = document.getElementById('upF1');
 const dnF1 = document.getElementById('dnF1');
 const upF2 = document.getElementById('upF2');
 const dnF2 = document.getElementById('dnF2');
-const resault = document.getElementById('resault');
+const upF3 = document.getElementById('upF3');
+const dnF3 = document.getElementById('dnF3');
 const symbol = document.getElementById('symbol');
 const buttonConfirm = document.getElementById("buttonConfirm");
 const result = document.querySelector(".result");
@@ -22,6 +23,7 @@ const nickConfirm = document.getElementById("nickConfirm");
 const register = document.querySelector(".register"); 
 const username = document.getElementById("username");
 const userid = document.getElementById("userid");
+const startinfo = document.querySelector(".startinfo")
 
 let vh = window.innerHeight;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -30,6 +32,9 @@ var __timePlay = 30;
 var progressBarInterval;
 var stageLevel = 0;
 var check = false;
+var unknown_index = 0;
+var unknown_number = 0;
+var difficulty = "normal";
 
 const gameInit = () => {
 
@@ -51,7 +56,7 @@ const gameInit = () => {
 	buttonConfirm.addEventListener('click', function () {
 		if (check2){
 			if (check) {
-				if (input.value == resaultQuestion) {
+				if (input.value == unknown_number) {
 					generateQuestion();
 					levelHack.textContent = "Zadanie " + stageLevel;
 					input.value = '';
@@ -100,6 +105,7 @@ const gameInit = () => {
 	hackText.style.display = 'none';
 	progressBar.style.display = 'none';
 	hackInfo.style.display = 'none';
+	startinfo.style.display = '';
 	//document.addEventListener('contextmenu', event => event.preventDefault());
 };
 
@@ -130,6 +136,7 @@ const gameStart = () => {
 	result.style.display = 'none';
 	register.style.display = 'none';
 	input.value = '';
+	startinfo.style.display = 'none';
 	progressBarStart('start', 2);
 };
 
@@ -142,6 +149,7 @@ const gameOver = async() => {
 	hackText.style.display = 'none';
 	result.style.display = 'none';
 	resultInfo.innerHTML = 'Zdobyte punkty: ' + (stageLevel - 1) + " pkt";
+	startinfo.style.display = 'none';
 
 	//const highest_score = getCookie("score");
 
@@ -184,7 +192,17 @@ function progressBarStart(type, time) {
   			let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   			// Display the result in the element with id="demo"
-  			document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+			if (distance > 0){
+				if (minutes > 0 && seconds == 0){
+					document.getElementById("timer").innerHTML = minutes + "m "
+				}
+				else if (minutes > 0){
+  					document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+				}
+				else{
+					document.getElementById("timer").innerHTML = seconds + "s ";
+				}
+			}
 
 		} else {
 			if (type == 'start') {
@@ -215,6 +233,7 @@ function progressBarStart(type, time) {
 				progressBar.style.display = 'none';
 				hackInfo.style.display = 'none';
 				result.style.display = '';
+				startinfo.style.display = '';
 			}
 		}
 	};
@@ -222,36 +241,82 @@ function progressBarStart(type, time) {
 	progressBarInterval = setInterval(process, time);
 }
 
-function getRndInteger(min, max) {
-	return Math.floor(Math.random() * (max - min)) + min;
-}
+function getRandomIntInclusive(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+  }
 
 let resaultQuestion = 0;
 
 function generateQuestion() {
-	let a1 = getRndInteger(1, 10);
-	let a2 = getRndInteger(1, 10);
+	let a1 = getRandomIntInclusive(2, 9);
+	let a2 = getRandomIntInclusive(1, a1 - 1);
 
-	dnF1.textContent = a1;
-	dnF2.textContent = a2;
-	upF1.textContent = getRndInteger(1, a1);
-	upF2.textContent = getRndInteger(1, a2);
+	let b1 = getRandomIntInclusive(2, 9);
+	let b2 = getRandomIntInclusive(1, b1 - 1);
 
-	let a3 = Math.random() < 0.5 ? true : false;
-	symbol.textContent = a3 ? '+' : '-';
 
-	let a4 = a3
-		? addition(parseInt(upF1.textContent), parseInt(upF2.textContent), parseInt(dnF1.textContent), parseInt(dnF2.textContent))
-		: subtraction(parseInt(upF1.textContent), parseInt(upF2.textContent), parseInt(dnF1.textContent), parseInt(dnF2.textContent));
+	let operation;
+	if (Math.random() < 0.5){
+		symbol.textContent = "+";
+		operation = addition(a2, b2, a1, b1)
+	}
+	else{
+		symbol.textContent = "-";
+		operation = subtraction(a2, b2, a1, b1);
+	}
 
-	resault.textContent = a4[1];
-
-	if (a4[0] < 0) {
+	if (operation[0] < 1) {
 		generateQuestion();
+		console.log(operation);
 	} else {
-		console.log(a4);
 		stageLevel++;
-		resaultQuestion = a4[0];
+
+		let all = [a1,a2,b1,b2,operation[1],operation[0]]
+
+		console.log(all);
+
+		if (difficulty == "easy"){
+			unknown_index = 5;
+		}
+		if (difficulty == "normal"){
+			unknown_index = getRandomIntInclusive(1,3)*2 - 1;
+		}
+		if (difficulty == "hard"){
+			unknown_index = getRandomIntInclusive(0,5);
+		}
+
+		if (difficulty == "hard"){
+			const dziel = nwd(all[4],all[5])
+			console.log(dziel);
+			all[4] = parseInt(all[4]/dziel);
+			all[5] = parseInt(all[5]/dziel);
+		}
+
+		console.log(all);
+
+		unknown_number = all[unknown_index];
+
+		all[unknown_index] = "?"
+
+		const lookup = ["dnF1","upF1","dnF2","upF2","dnF3","upF3"];
+
+		for (let i = 0; i < 6; i++){
+			document.getElementById(lookup[i]).style = "";
+		}
+
+		document.getElementById(lookup[unknown_index]).style = "color: #10ffcd";
+
+		dnF1.textContent = all[0];
+		upF1.textContent = all[1];
+
+		dnF2.textContent = all[2];
+		upF2.textContent = all[3];
+
+		dnF3.textContent = all[4];
+		upF3.textContent = all[5];
+	
 	}
 }
 
@@ -264,4 +329,26 @@ function subtraction(u1, u2, d1, d2) {
 	var a1 = u1 * d2 - u2 * d1;
 	var a2 = d1 * d2;
 	return [a1, a2];
+}
+
+function level(id){
+	document.getElementById("easy").style.border = "none";
+	document.getElementById("normal").style.border = "none";
+	document.getElementById("hard").style.border = "none";
+
+	document.getElementById(id).style.border = "1px solid rgba(105, 105, 105, 0.5)";
+	difficulty = id;
+}
+
+function nwd(a,b) {
+	if (a == b){
+		return 1;
+	}
+	let temp;
+    while (b != 0){
+        temp = a
+        a = b
+        b = temp%b
+	}
+	return a;
 }
