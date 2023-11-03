@@ -16,6 +16,11 @@ const listHacks = [
 		name: 'LICZBY PIERWSZE',
 		desc: 'znajdź liczbę',
 		link: 'game3',
+	},
+	{
+		name: 'PODZIELNOŚĆ',
+		desc: 'sprawdź podzielność',
+		link: 'game4',
 	}
 ];
 

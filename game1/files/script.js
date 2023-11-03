@@ -92,13 +92,13 @@ const gameWin = async() => {
 
 function progressBarStart(type, time) {
 	let start = new Date().getTime();
-	var maxwidth = 1000;
+	var maxwidth = 10000;
 	var width = maxwidth;
 	const process = () => {
 		if (width > 0) {
 			if (type == 'start' || type == 'end') width = width - 3;
 			else width--;
-			progressBarId.style.width = (width * 100.0) / maxwidth + '%';
+			progressBarId.style.width = (width * 1000.0) / maxwidth + '%';
 
 			let now = new Date().getTime();
   			let distance = start + time*1000 - now;
