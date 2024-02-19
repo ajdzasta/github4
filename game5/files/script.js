@@ -7,7 +7,6 @@ const hackInfo = document.querySelector('.hackInfo');
 const textInfo = document.getElementById('textInfo');
 const progressBarId = document.getElementById('progress-bar');
 const levelHack = document.getElementById('levelHack');
-const input = document.getElementById('inputValue');
 const upF1 = document.getElementById('upF1');
 const dnF1 = document.getElementById('dnF1');
 const upF2 = document.getElementById('upF2');
@@ -24,16 +23,15 @@ const register = document.querySelector(".register");
 const username = document.getElementById("username");
 const userid = document.getElementById("userid");
 const startinfo = document.querySelector(".startinfo")
+const input = document.getElementById('inputValue');
 
 let vh = window.innerHeight;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-var __timePlay = 30;
+var __timePlay = 240;
 var progressBarInterval;
 var stageLevel = 0;
 var check = false;
-var unknown_index = 0;
-var unknown_number = 0;
 var difficulty = "normal";
 
 const gameInit = () => {
@@ -56,8 +54,8 @@ const gameInit = () => {
 	buttonConfirm.addEventListener('click', function () {
 		if (check2){
 			if (check) {
-				if (input.value == unknown_number) {
-					generateQuestion();
+				if (check_numbers2(input.value) == 6) {
+					GenerateNumbers()
 					levelHack.textContent = "Zadanie " + stageLevel;
 					input.value = '';
 					progressBarStart('game', __timePlay);
@@ -135,8 +133,8 @@ const gameStart = () => {
 	textInfo.innerHTML = 'Przygotuj sie...';
 	result.style.display = 'none';
 	register.style.display = 'none';
-	input.value = '';
 	startinfo.style.display = 'none';
+	input.value = '';
 	progressBarStart('start', 2);
 };
 
@@ -212,7 +210,7 @@ function progressBarStart(type, time) {
 				hackText.style.display = '';
 				hackInfo.style.display = 'none';
 				check = true;
-				generateQuestion();
+				GenerateNumbers()
 				progressBarStart('game', __timePlay);
 				return;
 			}
@@ -250,86 +248,186 @@ function getRandomIntInclusive(min, max) {
 
 let resaultQuestion = 0;
 
-function generateQuestion() {
-	let a1 = getRandomIntInclusive(2, 9);
-	let a2 = getRandomIntInclusive(1, a1 - 1);
+let numbers = [];
+let length = 0
 
-	let b1 = getRandomIntInclusive(2, 9);
-	let b2 = getRandomIntInclusive(1, b1 - 1);
-
-
-	let operation;
-	if (Math.random() < 0.5){
-		symbol.textContent = "+";
-		operation = addition(a2, b2, a1, b1)
-	}
-	else{
-		symbol.textContent = "-";
-		operation = subtraction(a2, b2, a1, b1);
-	}
-
-	if (operation[0] < 1) {
-		generateQuestion();
-		console.log(operation);
-	} else {
-		stageLevel++;
-
-		let all = [a1,a2,b1,b2,operation[1],operation[0]]
-
-		console.log(all);
-
-		if (difficulty == "easy"){
-			unknown_index = 5;
-		}
-		if (difficulty == "normal"){
-			unknown_index = getRandomIntInclusive(1,3)*2 - 1;
-		}
-		if (difficulty == "hard"){
-			unknown_index = getRandomIntInclusive(0,5);
-		}
-
-		if (difficulty == "hard"){
-			const dziel = nwd(all[4],all[5])
-			console.log(dziel);
-			all[4] = parseInt(all[4]/dziel);
-			all[5] = parseInt(all[5]/dziel);
-		}
-
-		console.log(all);
-
-		unknown_number = all[unknown_index];
-
-		all[unknown_index] = "?"
-
-		const lookup = ["dnF1","upF1","dnF2","upF2","dnF3","upF3"];
-
-		for (let i = 0; i < 6; i++){
-			document.getElementById(lookup[i]).style = "";
-		}
-
-		document.getElementById(lookup[unknown_index]).style = "color: #10ffcd";
-
-		dnF1.textContent = all[0];
-		upF1.textContent = all[1];
-
-		dnF2.textContent = all[2];
-		upF2.textContent = all[3];
-
-		dnF3.textContent = all[4];
-		upF3.textContent = all[5];
-	
-	}
+const number_dif = {
+	easy: 3,
+	normal: 4,
+	hard: 5
 }
 
-function addition(u1, u2, d1, d2) {
-	var a1 = u1 * d2 + u2 * d1;
-	var a2 = d1 * d2;
-	return [a1, a2];
+function GenerateNumbers(){
+
+	numbers = []
+
+	length = number_dif[difficulty]
+
+    for (let i = 0; i < 7; i++){
+        numbers.push(unique_random_number(length));
+    }
+
+	for (let i = 0; i < 6; i++){
+		number_string = (numbers[i + 1]).join("");
+		document.getElementById("clue" + i + "0").innerText = number_string;
+	}
+
+	for (let i = 0; i < 6; i++){
+		number_check = (check_numbers(numbers[0],numbers[i + 1]))
+		let string = number_check;
+		if (number_check[0] == 0){
+			string = "żadna nie jest porawna"
+		}
+		else if (number_check[0] == number_check[1]){
+			if (number_check[0] == 1){
+				string = "jedna jest poprawna i na dobrym miejscu"
+			}
+			if (number_check[0] == 2){
+				string = "dwie są poprawne i na dobrych miejscach"
+			}
+			if (number_check[0] == 3){
+				string = "trzy są poprawne i na dobrych miejscach"
+			}
+			if (number_check[0] == 4){
+				string = "cztery są poprawne i na dobrych miejscach"
+			}
+
+		}
+		else {
+			if (number_check[0] == 1){
+				string = "jedna jest poprawna"
+				if (number_check[1] == 0){
+					string += ", ale na złym miejscu"
+				}
+			}
+			if (number_check[0] == 2){
+				string = "dwie są porawne"
+				if (number_check[1] == 0){
+					string += ", ale na złych miejscach"
+				}
+				if (number_check[1] == 1){
+					string += ", ale jedna na dobrym miejscu"
+				}
+			}
+			if (number_check[0] == 3){
+				string = "trzy są porawne"
+				if (number_check[1] == 0){
+					string += ", ale na złych miejscach"
+				}
+				if (number_check[1] == 1){
+					string += ", ale jedna na dobrym miejscu"
+				}
+				if (number_check[1] == 2){
+					string += ", ale dwie na dobrych miejscach"
+				}
+			}
+			if (number_check[0] == 4){
+				string = "cztery są porawne"
+				if (number_check[1] == 0){
+					string += ", ale na złych miejscach"
+				}
+				if (number_check[1] == 1){
+					string += ", ale jedna na dobrym miejscu"
+				}
+				if (number_check[1] == 2){
+					string += ", ale dwie na dobrych miejscach"
+				}
+				if (number_check[1] == 3){
+					string += ", ale trzy na dobrych miejscach"
+				}
+			}
+		}
+		document.getElementById("clue" + i + "1").innerText = string;
+	}
+
+    console.log(numbers[0]);
+    console.log(numbers)
+	stageLevel++;
+
 }
-function subtraction(u1, u2, d1, d2) {
-	var a1 = u1 * d2 - u2 * d1;
-	var a2 = d1 * d2;
-	return [a1, a2];
+
+function getRandomIntInclusive(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+}
+
+function check_numbers(start, number){
+    //number = number.toString().split("")
+    let correct = [0,0];
+    //console.log(correct);
+    for (let i = 0; i < number.length; i ++){
+        for (let j = 0; j < number.length; j ++){
+            if (number[i] == start[j]){
+                //console.log(i,j);
+                correct[0] += 1;
+            }
+        }
+    }
+
+    for (let i = 0; i < number.length; i ++){
+            if (start[i] == number[i]){
+                correct[1] += 1;
+            }
+    }
+
+    return correct;
+}
+
+function random_number(length){
+    let number = []
+
+    number.push(getRandomIntInclusive(0,9));
+    let random = getRandomIntInclusive(0,9);
+    
+    while (number.length < length){
+        if (number.indexOf(random) == -1){
+            number.push(random);
+        }
+        else{
+            random = getRandomIntInclusive(0,9);
+        }
+    }
+
+    return number;
+}
+
+function unique_random_number(length){
+    number = random_number(length);
+    while (numbers.indexOf(number) != -1){
+        number = random_number(length);
+        if (numbers.length > 0){
+            while (check_numbers(numbers[0],number)[0] > length - 1){
+                number = random_number(length)
+            }
+        }
+    }
+    
+    return number;
+}
+
+function check_numbers2(number){
+    let checks = 0
+    for (let i = 1; i < 7; i++){
+        if (check_numbers(numbers[0],numbers[i]).toString() == check_numbers(number.toString().split(""),numbers[i]).toString()){
+            //console.log("chuj");
+            checks += 1;
+        }
+    }
+    return checks;
+}
+
+function solver(){
+
+    for (let i = 0; i < Math.pow(10,length); i++){
+        i = i.toString()
+        while (i.length < length){
+            i = "0" + i
+        }
+        if (check_numbers2(i) == 6){
+            console.log(i)
+        }
+    }
 }
 
 function level(id){
@@ -339,17 +437,4 @@ function level(id){
 
 	document.getElementById(id).style.border = "1px solid rgba(105, 105, 105, 0.5)";
 	difficulty = id;
-}
-
-function nwd(a,b) {
-	if (a == b){
-		return 1;
-	}
-	let temp;
-    while (b != 0){
-        temp = a
-        a = b
-        b = temp%b
-	}
-	return a;
 }

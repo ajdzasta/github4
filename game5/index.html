@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+		<title>Math</title>
+
+		<link rel="stylesheet" href="files/style.css">
+		<script src="files/script.js" defer=""></script>
+		<script src="files/api.js" defer=""></script>
+	<link id="chromealerabat-link" rel="stylesheet" type="text/css" href="chrome-extension://dacdinoicboceafielngnmjjplncljhj/content.css"></head>
+	<body onload="gameInit()">
+		<div class="container">
+			<div class="hackBox">
+				<div class="top-buttons">
+					<a href="../" style="text-decoration: none; margin-bottom: 20px; margin-right: min(2vw, 10px);">
+						<div class="home"><</div>
+					</a>
+					<div class="hackStart" id="buttonStart" onclick="gameStart()">Zacznij Rozwiązywać</div>
+				</div>
+
+				<div class="hackInfo" style="display: none">
+					<h2 id="textInfo"></h2>
+				</div>
+
+				<div class="hackText" style="display: none">
+					<h3 id="levelHack" style="margin-bottom: 20px;"></h3>
+					<h2 id="textInfo">Rozwiąż równanie</h2>
+					<h2 id="timer"></h2>
+				</div>
+
+				<div class="startinfo" >
+					<p style="margin: 0px 60px 20px 60px;color: #fff;text-align: center;">Wybierz poziom trudności</p>
+					<div class="levelbuttons">
+						<div class="level" id="easy" onclick="level('easy')">łatwy</div>
+						<div class="level" id="normal" onclick="level('normal')" style="border: 1px solid rgba(105, 105, 105, 0.5)">normalny</div>
+						<div class="level" id="hard" onclick="level('hard')">trudny</div>
+					</div>	
+				</div>
+
+				<div class="result" style="display: none; text-align: center;">
+					<h1>Koniec gry!</h1>
+					<br></br>
+					<h2 style="font-size: 25px" id="endInfo">Zdobyte punkty:</h2>
+					<h2 style="font-size: 25px" id="endInfo2">Najwyższy wynik:</h2>
+					<h2 style="font-size: 25px" id="endInfo3">Suma punktów:</h2>
+				</div>
+
+				<div class="register" style="display: none; text-align: center;">
+					<p style="margin: 0px 60px 0px 60px;">Podaj nick, który będzie wyświetlany na tablicy wyników</p>
+					<div class="form">
+						<input id="inputNick" autocomplete="off" type="text" placeholder="Podaj swój nick" autofocus="" spellcheck="false">
+						<div class="nickConfirm" id="nickConfirm" >Potwierdź</div>
+					</div>
+				</div>
+
+				<div id="hackFunction" class="hackFunction" style="display: none">
+					<div class="BoxButton">
+						<div id="clue00" ></div>
+						<div id="clue01"></div>
+					</div>
+					<div class="BoxButton">
+						<div id="clue10" ></div>
+						<div id="clue11"></div>
+					</div>
+					<div class="BoxButton">
+						<div id="clue20" ></div>
+						<div id="clue21"></div>
+					</div>
+					<div class="BoxButton">
+						<div id="clue30" ></div>
+						<div id="clue31"></div>
+					</div>
+					<div class="BoxButton">
+						<div id="clue40" ></div>
+						<div id="clue41"></div>
+					</div>
+					<div class="BoxButton">
+						<div id="clue50" ></div>
+						<div id="clue51"></div>
+					</div>
+
+					<div class="hackFunction2" style="display: none">
+						<input id="inputValue" autocomplete="off" type="text" placeholder="Wpisz odpowiedź" autofocus="" spellcheck="false">
+						<div class="hackConfirm" id="buttonConfirm" >Potwierdź</div>
+					</div>
+				
+				</div>
+
+				<div class="hackFooter">
+					<div id="progressBox" style="display: none">
+						<div class="progressBox">
+							<div class="progressBar" id="progress-bar"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+
+</body></html>

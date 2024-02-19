@@ -190,6 +190,7 @@ function progressBarStart(type, time) {
 	let start = new Date().getTime();
 	var maxwidth = 1000;
 	var width = maxwidth;
+	progressBarId.style.width = '100%';
 	const process = () => {
 		if (width > 0) {
 			if (type == 'start' || type == 'end') width = width - 3;

@@ -21,6 +21,11 @@ const listHacks = [
 		name: 'PODZIELNOŚĆ',
 		desc: 'sprawdź podzielność',
 		link: 'game4',
+	},
+	{
+		name: 'KOD',
+		desc: 'zgadywanie kodu',
+		link: 'game4',
 	}
 ];
 
