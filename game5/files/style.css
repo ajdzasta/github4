@@ -114,7 +114,7 @@ a .home:hover {
 }
 
 .container .hackBox .hackFunction2 .hackConfirm {
-    margin-bottom: min(0.5rem, 20px);
+    margin-bottom: min(0.25rem, 20px);
     display: flex;
     border: none !important;
     background-color: #0f0028;
@@ -191,6 +191,7 @@ a .home:hover {
     margin-bottom: min(1vw, 10px);
     position: relative;
     top: -35px;
+    pointer-events: none;
 }
 
 .container .hackBox .hackText h2 {
@@ -220,7 +221,7 @@ a .home:hover {
     background-color: rgba(24, 3, 41, 0.2);
     -webkit-animation: background-rotate forwards linear infinite 30s;
     animation: background-rotate forwards linear infinite 30s;
-    padding: min(2.5vw, 14px);
+    padding: min(1.5vw, 14px);
     border: 1px solid rgba(105, 105, 105, 0.5);
     text-align: center;
     justify-content: space-between;
@@ -232,7 +233,16 @@ a .home:hover {
 .container .hackBox .hackFunction .BoxButton .number{
     font-weight: bold; 
     font-size: min(6vw, 18px);
-    margin: 0px 5px 0px 0px;
+    margin: 0px 7px 0px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container .hackBox .hackFunction .BoxButton .text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .container .hackBox .hackFunction2 {
@@ -305,7 +315,7 @@ a .home:hover {
     width: 80%;
     background-color: rgba(0,0,0,0);
     border-width: 0 0 .2rem;
-    padding: min(1rem, 25px) 0;
+    padding: min(0.8rem, 25px) 0;
     font-size: min(5vw, 25px);
     border-color: #fff;
     color: #fff;
