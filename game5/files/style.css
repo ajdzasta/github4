@@ -188,7 +188,9 @@ a .home:hover {
     text-align: center;
     color: #fff;
     flex-direction: column;
-    margin-bottom: 12px;
+    margin-bottom: min(1vw, 10px);
+    position: relative;
+    top: -35px;
 }
 
 .container .hackBox .hackText h2 {
@@ -208,6 +210,8 @@ a .home:hover {
     max-height: min(600px, 80vh - 100px);
     overflow: auto;
     padding: 5px 15px 10px 10px;
+    position: relative;
+    top: -35px;
 }
 
 .container .hackBox .hackFunction .BoxButton{
@@ -227,7 +231,8 @@ a .home:hover {
 
 .container .hackBox .hackFunction .BoxButton .number{
     font-weight: bold; 
-    font-size: min(5vw, 16px);
+    font-size: min(6vw, 18px);
+    margin: 0px 5px 0px 0px;
 }
 
 .container .hackBox .hackFunction2 {
