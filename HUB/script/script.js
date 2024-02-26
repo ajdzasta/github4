@@ -26,6 +26,11 @@ const listHacks = [
 		name: 'KOD',
 		desc: 'zgadywanie kodu',
 		link: 'game5',
+	},
+	{
+		name: 'HANOI',
+		desc: 'układanie wieży',
+		link: 'game6',
 	}
 ];
 
