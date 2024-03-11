@@ -394,15 +394,16 @@ function random_number(length){
 
 function unique_random_number(length){
     number = random_number(length);
-    while (numbers.indexOf(number) != -1){
-        number = random_number(length);
-        if (numbers.length > 0){
-            while (check_numbers(numbers[0],number)[0] > length - 1){
-                number = random_number(length)
-            }
-        }
-    }
-    
+	if (numbers.length == 0){
+		number = random_number(length);
+	}
+	else{
+		number = random_number(length);
+		while (numbers.indexOf(number) != -1 || check_numbers(numbers[0],number)[0] > length - 1){
+			number = random_number(length);
+		}
+	}
+
     return number;
 }
 
