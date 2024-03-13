@@ -146,64 +146,97 @@ let draggedDisk = null; // Declare draggedDisk globally
 
 // Function to initialize drag
 function initializeDrag(element, event) {
-    // Store initial positions and offsets
-    initialX = event.clientX;
-    initialY = event.clientY;
-    offsetX = element.getBoundingClientRect().left - event.clientX;
-    offsetY = element.getBoundingClientRect().top - event.clientY;
+  // Store reference to the dragged disk
+  draggedDisk = element;
 
-    // Store reference to the dragged disk
-    draggedDisk = element;
+  // Determine whether the event is a mouse event or a touch event
+  let clientX, clientY;
+  if (event.type.startsWith('touch')) {
+      clientX = event.touches[0].clientX;
+      clientY = event.touches[0].clientY;
+  } else {
+      clientX = event.clientX;
+      clientY = event.clientY;
+  }
 
-    // Set element's position to absolute
-    element.style.position = 'absolute';
+  // Calculate initial positions relative to the dragged element's top-left corner
+  offsetX = clientX - draggedDisk.getBoundingClientRect().left;
+  offsetY = clientY - draggedDisk.getBoundingClientRect().top;
 
-    // Set z-index to bring the element to the top
-    element.style.zIndex = '9999';
+  // Set z-index to bring the element to the top
+  element.style.zIndex = '9999';
 
-    // Move the element to the top of the document
-    document.body.appendChild(element);
+  // Set element's position to absolute
+  element.style.position = 'absolute';
 
-    // Add event listeners for mousemove and mouseup events
-    document.addEventListener('mousemove', dragElement);
-    document.addEventListener('mouseup', dropDisk);
+  // Move the element to the top of the document
+  document.body.appendChild(element);
+
+  // Set initial position based on the document coordinates
+  dragElement(clientX, clientY);
+
+  // Add event listeners for mousemove, touchmove, mouseup, and touchend events
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('touchmove', onTouchMove, { passive: false });
+  document.addEventListener('mouseup', onMouseUp);
+  document.addEventListener('touchend', onTouchEnd);
+}
+
+// Function to handle dragging for mouse events
+function onMouseMove(event) {
+  if (draggedDisk) {
+      dragElement(event.clientX, event.clientY);
+  }
+}
+
+// Function to handle dragging for touch events
+function onTouchMove(event) {
+  if (draggedDisk) {
+      event.preventDefault(); // Prevent scrolling while dragging
+      dragElement(event.touches[0].clientX, event.touches[0].clientY);
+  }
+}
+
+// Function to handle dropping the disk for mouse events
+function onMouseUp() {
+  if (draggedDisk) {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+      dropDisk();
+  }
+}
+
+// Function to handle dropping the disk for touch events
+function onTouchEnd() {
+  if (draggedDisk) {
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
+      dropDisk();
+  }
 }
 
 // Function to handle dragging
-function dragElement(event) {
-    if (draggedDisk) {
-        // Calculate new position based on mouse position and initial offset
-        let newX = event.clientX + offsetX;
-        let newY = event.clientY + offsetY;
+function dragElement(clientX, clientY) {
+  // Calculate new position based on mouse/touch position and initial offset
+  let newX = clientX - offsetX;
+  let newY = clientY - offsetY;
 
-        // Move the element to the new position
-        draggedDisk.style.left = newX + 'px';
-        draggedDisk.style.top = newY + 'px';
-    }
+  // Move the element to the new position
+  draggedDisk.style.left = newX + 'px';
+  draggedDisk.style.top = newY + 'px';
 }
 
 // Function to handle dropping the disk
 function dropDisk() {
-    if (draggedDisk) {
-        // Remove event listeners for dragging
-        document.removeEventListener('mousemove', dragElement);
-        document.removeEventListener('mouseup', dropDisk);
+  if (draggedDisk) {
+      // Reset z-index and position
+      draggedDisk.style.zIndex = '';
+      draggedDisk.style.position = '';
 
-        // Reset z-index and position
-        draggedDisk.style.zIndex = '';
-        draggedDisk.style.position = '';
-
-        // Reset draggedDisk
-        draggedDisk = null;
-    }
+      // Reset draggedDisk
+      draggedDisk = null;
+  }
 }
-
-// Attach event listeners to disks for initiating drag
-document.querySelectorAll('.disk').forEach(disk => {
-    disk.addEventListener('mousedown', function(event) {
-        initializeDrag(this, event);
-    });
-});
 
 /*
 var delay = 200;
