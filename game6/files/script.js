@@ -137,6 +137,90 @@ function progressBarStart(type, time) {
 	progressBarInterval = setInterval(process, time);
 }
 
+// Variables to store initial positions and offsets
+let initialX = 0;
+let initialY = 0;
+let offsetX = 0;
+let offsetY = 0;
+let draggedDisk = null; // Declare draggedDisk globally
+
+// Function to initialize drag
+function initializeDrag(element, event) {
+  // Store initial positions and offsets
+  initialX = event.clientX;
+  initialY = event.clientY;
+  offsetX = initialX - element.getBoundingClientRect().left;
+  offsetY = initialY - element.getBoundingClientRect().top;
+
+  // Store reference to the dragged disk
+  draggedDisk = element;
+
+  // Set element's position to absolute
+  element.style.position = 'absolute';
+
+  // Set z-index to bring the element to the top
+  element.style.zIndex = '9999';
+
+  // Move the element to the top of the document
+  document.body.appendChild(element);
+
+  // Add event listeners for mousemove and mouseup events
+  document.addEventListener('mousemove', dragElement);
+  document.addEventListener('mouseup', dropDisk);
+}
+
+// Function to handle dragging
+function dragElement(event) {
+  if (draggedDisk) {
+      // Calculate new position based on mouse position and initial offset
+      let newX = event.clientX - offsetX;
+      let newY = event.clientY - offsetY;
+
+      // Adjust position to keep the dragged element within the viewport
+      newX = Math.max(0, Math.min(newX, window.innerWidth - draggedDisk.offsetWidth));
+      newY = Math.max(0, Math.min(newY, window.innerHeight - draggedDisk.offsetHeight));
+
+      // Move the element to the new position
+      draggedDisk.style.left = newX + 'px';
+      draggedDisk.style.top = newY + 'px';
+  }
+}
+
+// Function to handle dropping the disk
+function dropDisk() {
+    if (draggedDisk) {
+        // Remove event listeners for dragging
+        document.removeEventListener('mousemove', dragElement);
+        document.removeEventListener('mouseup', dropDisk);
+
+        // Reset z-index and position
+        draggedDisk.style.zIndex = '';
+        draggedDisk.style.position = '';
+
+        // Find the peg where the disk was dropped
+        let peg = document.elementFromPoint(event.clientX, event.clientY);
+        if (peg && peg.classList.contains('container2')) {
+            // Append the disk to the dropped peg
+            peg.appendChild(draggedDisk);
+        } else {
+            // Reset the disk position if not dropped on a peg
+            draggedDisk.style.left = initialX + 'px';
+            draggedDisk.style.top = initialY + 'px';
+        }
+
+        // Reset draggedDisk
+        draggedDisk = null;
+    }
+}
+
+// Attach event listeners to disks for initiating drag
+document.querySelectorAll('.disk').forEach(disk => {
+    disk.addEventListener('mousedown', function(event) {
+        initializeDrag(this, event);
+    });
+});
+
+/*
 var delay = 200;
 var drag = false;
 var objDisk = null;
@@ -391,5 +475,6 @@ function getMoves(from, to, empty, numDisk) {
   }
 }
 
+*/
 
 gameInit();
