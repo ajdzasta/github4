@@ -146,50 +146,56 @@ let draggedDisk = null; // Declare draggedDisk globally
 
 // Function to initialize drag
 function initializeDrag(element, event) {
-  // Determine whether the event is a mouse event or a touch event
-  let clientX, clientY;
-  if (event.type.startsWith('touch')) {
-      clientX = event.touches[0].clientX;
-      clientY = event.touches[0].clientY;
-  } else {
-      clientX = event.clientX;
-      clientY = event.clientY;
-  }
+    // Prevent default touch event behavior to avoid scrolling or other interference
+    event.preventDefault();
 
-  // Store initial positions and offsets
-  initialX = clientX;
-  initialY = clientY;
-  offsetX = clientX - element.getBoundingClientRect().left;
-  offsetY = clientY - element.getBoundingClientRect().top;
+    // Determine whether the event is a mouse event or a touch event
+    let clientX, clientY;
+    if (event.type.startsWith('touch')) {
+        clientX = event.touches[0].clientX;
+        clientY = event.touches[0].clientY;
+    } else {
+        clientX = event.clientX;
+        clientY = event.clientY;
+    }
 
-  // Set element's position to absolute
-  element.style.position = 'absolute';
+    // Store initial positions and offsets
+    initialX = clientX;
+    initialY = clientY;
+    offsetX = clientX - element.getBoundingClientRect().left;
+    offsetY = clientY - element.getBoundingClientRect().top;
 
-  // Set initial position based on the document coordinates
-  element.style.left = initialX - offsetX + 'px';
-  element.style.top = initialY - offsetY + 'px';
+    // Set element's position to absolute
+    element.style.position = 'absolute';
 
-  // Set z-index to bring the element to the top
-  element.style.zIndex = '9999';
+    // Set initial position based on the document coordinates
+    element.style.left = initialX - offsetX + 'px';
+    element.style.top = initialY - offsetY + 'px';
 
-  // Move the element to the top of the document
-  document.body.appendChild(element);
+    // Set z-index to bring the element to the top
+    element.style.zIndex = '9999';
 
-  // Store reference to the dragged disk
-  draggedDisk = element;
+    // Move the element to the top of the document
+    document.body.appendChild(element);
 
-  // Add event listeners for mousemove and mouseup events
-  if (event.type.startsWith('touch')) {
-      document.addEventListener('touchmove', dragElement);
-      document.addEventListener('touchend', dropDisk);
-  } else {
-      document.addEventListener('mousemove', dragElement);
-      document.addEventListener('mouseup', dropDisk);
-  }
+    // Store reference to the dragged disk
+    draggedDisk = element;
+
+    // Add event listeners for mousemove and mouseup events
+    if (event.type.startsWith('touch')) {
+        document.addEventListener('touchmove', dragElement);
+        document.addEventListener('touchend', dropDisk);
+    } else {
+        document.addEventListener('mousemove', dragElement);
+        document.addEventListener('mouseup', dropDisk);
+    }
 }
 
 // Function to handle dragging
 function dragElement(event) {
+    // Prevent default touch event behavior to avoid scrolling or other interference
+    event.preventDefault();
+
     // Determine whether the event is a mouse event or a touch event
     let clientX, clientY;
     if (event.type.startsWith('touch')) {
