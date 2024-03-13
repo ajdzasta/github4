@@ -146,42 +146,45 @@ let draggedDisk = null; // Declare draggedDisk globally
 
 // Function to initialize drag
 function initializeDrag(element, event) {
-    // Determine whether the event is a mouse event or a touch event
-    let clientX, clientY;
-    if (event.type.startsWith('touch')) {
-        clientX = event.touches[0].clientX;
-        clientY = event.touches[0].clientY;
-    } else {
-        clientX = event.clientX;
-        clientY = event.clientY;
-    }
+  // Determine whether the event is a mouse event or a touch event
+  let clientX, clientY;
+  if (event.type.startsWith('touch')) {
+      clientX = event.touches[0].clientX;
+      clientY = event.touches[0].clientY;
+  } else {
+      clientX = event.clientX;
+      clientY = event.clientY;
+  }
 
-    // Store initial positions and offsets
-    initialX = clientX;
-    initialY = clientY;
-    offsetX = clientX - element.getBoundingClientRect().left;
-    offsetY = clientY - element.getBoundingClientRect().top;
+  // Store initial positions and offsets
+  initialX = clientX;
+  initialY = clientY;
+  offsetX = clientX - element.getBoundingClientRect().left;
+  offsetY = clientY - element.getBoundingClientRect().top;
 
-    // Store reference to the dragged disk
-    draggedDisk = element;
+  // Set element's position to absolute
+  element.style.position = 'absolute';
 
-    // Set element's position to absolute
-    element.style.position = 'absolute';
+  // Set z-index to bring the element to the top
+  element.style.zIndex = '9999';
 
-    // Set z-index to bring the element to the top
-    element.style.zIndex = '9999';
+  // Move the element to the top of the document
+  document.body.appendChild(element);
 
-    // Move the element to the top of the document
-    document.body.appendChild(element);
+  // Move the element to the initial cursor position
+  dragElement(event);
 
-    // Add event listeners for mousemove and mouseup events
-    if (event.type.startsWith('touch')) {
-        document.addEventListener('touchmove', dragElement);
-        document.addEventListener('touchend', dropDisk);
-    } else {
-        document.addEventListener('mousemove', dragElement);
-        document.addEventListener('mouseup', dropDisk);
-    }
+  // Store reference to the dragged disk
+  draggedDisk = element;
+
+  // Add event listeners for mousemove and mouseup events
+  if (event.type.startsWith('touch')) {
+      document.addEventListener('touchmove', dragElement);
+      document.addEventListener('touchend', dropDisk);
+  } else {
+      document.addEventListener('mousemove', dragElement);
+      document.addEventListener('mouseup', dropDisk);
+  }
 }
 
 // Function to handle dragging
