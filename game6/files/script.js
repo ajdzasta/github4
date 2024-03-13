@@ -165,14 +165,15 @@ function initializeDrag(element, event) {
   // Set element's position to absolute
   element.style.position = 'absolute';
 
+  // Set initial position based on the document coordinates
+  element.style.left = initialX - offsetX + 'px';
+  element.style.top = initialY - offsetY + 'px';
+
   // Set z-index to bring the element to the top
   element.style.zIndex = '9999';
 
   // Move the element to the top of the document
   document.body.appendChild(element);
-
-  // Move the element to the initial cursor position
-  dragElement(event);
 
   // Store reference to the dragged disk
   draggedDisk = element;
