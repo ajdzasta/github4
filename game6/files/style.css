@@ -403,7 +403,6 @@ a {
     height:2px
 }
 .disk {
-    position: absolute;
     visibility: visible;
     border: 1px solid black;
 }
@@ -411,7 +410,19 @@ a {
     display: flex;
     justify-content: center;
 }
+.wrapper2{
+    display: flex;
+    justify-content: center;
+}
 .container2{
+    width: min(200px, 30vw);
+    height: min(200px, 30vw);
+    margin: min(20px, 3vw);
+}
+.container3{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
     width: min(200px, 30vw);
     height: min(200px, 30vw);
     margin: min(20px, 3vw);

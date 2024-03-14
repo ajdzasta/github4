@@ -11,6 +11,7 @@ const clearButton = document.getElementById("clear");
 const confirmButton = document.getElementById("confirm");
 const container2 = document.getElementById("container2");
 const wrapper = document.querySelector(".wrapper");
+const wrapper2 = document.querySelector(".wrapper2");
 const buttons = document.querySelector(".buttons");
 const inputs = document.querySelectorAll('.input');
 const operators = document.querySelectorAll('.op');
@@ -41,6 +42,7 @@ const gameInit = () => {
 	progressBar.style.display = 'none';
 	hackInfo.style.display = 'none';
 	wrapper.style.display = 'none';
+  wrapper2.style.display = 'none';
 	buttons.style.display = 'none';
 	
 };
@@ -60,6 +62,7 @@ const gameWin = async() => {
 	hackInfo.style.display = 'block';
 	textInfo.innerHTML = 'Zadanie udane!';
 	wrapper.style.display = 'none';
+  wrapper2.style.display = 'none';
 	buttons.style.display = 'none';
 	hackText.style.display = 'none';
 	resultscreen.style.display = 'none';
@@ -105,6 +108,7 @@ function progressBarStart(type, time) {
 		} else {
 			if (type == 'start') {
 				wrapper.style.display = 'flex';
+        wrapper2.style.display = 'flex';
 				buttons.style.display = '';
 				hackText.style.display = '';
 				hackInfo.style.display = 'none';
@@ -115,6 +119,7 @@ function progressBarStart(type, time) {
 
 			if (type == 'game') {
 				wrapper.style.display = 'none';
+        wrapper2.style.display = 'none';
 				buttons.style.display = 'none';
 				hackInfo.style.display = 'block';
 				hackText.style.display = 'none';
@@ -124,6 +129,7 @@ function progressBarStart(type, time) {
 
 			if (type == 'end') {
 				wrapper.style.display = 'none';
+        wrapper2.style.display = 'none';
 				buttons.style.display = 'none';
 				hackText.style.display = 'none';
 				buttonStart.style.display = '';
@@ -143,6 +149,15 @@ let initialY = 0;
 let offsetX = 0;
 let offsetY = 0;
 let draggedDisk = null; // Declare draggedDisk globally
+
+IntitDisc(3)
+
+function IntitDisc(disknum){
+  for (let i = disknum; i > 0; i--){
+    document.getElementById("tower21").appendChild(document.getElementById("disk" + i));
+    document.getElementById("disk" + i).style.display = "block";
+  }
+}
 
 // Function to initialize drag
 function initializeDrag(element, event) {
@@ -228,7 +243,29 @@ function dropDisk() {
 
         // Reset z-index and position
         draggedDisk.style.zIndex = '';
+        draggedDisk.style.position = 'absolute';
+
+
+        let towers = document.getElementsByClassName('container2');
+
+        // Calculate the nearest pole's position
+        let minDistance = Infinity;
+        let nearestTower;
+        for (let i = 0; i < towers.length; i++) {
+            let tower = towers[i];
+            let poleRect = tower.getBoundingClientRect();
+            let diskRect = draggedDisk.getBoundingClientRect();
+            let distance = Math.abs((diskRect.left + draggedDisk.offsetWidth/2) - (poleRect.left + tower.offsetWidth/2));
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearestTower = tower;
+            }
+        }
+
         draggedDisk.style.position = '';
+        console.log(nearestTower.id.slice(5))
+        document.getElementById("tower2" + nearestTower.id.slice(5)).appendChild(draggedDisk);
+
 
         // Reset draggedDisk
         draggedDisk = null;
