@@ -263,7 +263,7 @@ function dropDisk() {
         }
 
         draggedDisk.style.position = '';
-        console.log(nearestTower.id.slice(5))
+        //console.log(nearestTower.id.slice(5))
         document.getElementById("tower2" + nearestTower.id.slice(5)).appendChild(draggedDisk);
 
 
