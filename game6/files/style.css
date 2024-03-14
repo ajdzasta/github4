@@ -417,7 +417,7 @@ a {
 .container2{
     width: min(200px, 30vw);
     height: min(200px, 30vw);
-    margin: min(20px, 3vw);
+    margin: min(20px, 2vw);
 }
 .container3{
     display: flex;
@@ -425,7 +425,7 @@ a {
     align-items: center;
     width: min(200px, 30vw);
     height: min(200px, 30vw);
-    margin: min(20px, 3vw);
+    margin: min(20px, 2vw);
 }
 
 
