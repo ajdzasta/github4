@@ -28,7 +28,7 @@ const gameInit = () => {
 	//init();
 
 	clearButton.addEventListener('click', () => {
-		Clear();
+		IntitDisc(disknum)
 	});
 
 	buttonStart.addEventListener('click', () => {
@@ -149,8 +149,10 @@ let initialY = 0;
 let offsetX = 0;
 let offsetY = 0;
 let draggedDisk = null; // Declare draggedDisk globally
+let draggedDiskTower = 0;
+var disknum = 3;
 
-IntitDisc(3)
+IntitDisc(disknum)
 
 function IntitDisc(disknum){
   for (let i = disknum; i > 0; i--){
@@ -161,6 +163,9 @@ function IntitDisc(disknum){
 
 // Function to initialize drag
 function initializeDrag(element, event) {
+    if (element != element.parentNode.children[element.parentNode.children.length - 1]){
+      return
+    }
     // Prevent default touch event behavior to avoid scrolling or other interference
     event.preventDefault();
 
@@ -173,6 +178,8 @@ function initializeDrag(element, event) {
         clientX = event.clientX;
         clientY = event.clientY;
     }
+
+    draggedDiskTower = element.parentNode.id.slice(5)
 
     // Store initial positions and offsets
     initialX = clientX;
@@ -195,6 +202,7 @@ function initializeDrag(element, event) {
 
     // Store reference to the dragged disk
     draggedDisk = element;
+    
 
     // Add event listeners for mousemove and mouseup events
     if (event.type.startsWith('touch')) {
@@ -264,12 +272,35 @@ function dropDisk() {
 
         draggedDisk.style.position = '';
         //console.log(nearestTower.id.slice(5))
-        document.getElementById("tower2" + nearestTower.id.slice(5)).appendChild(draggedDisk);
-
+        if (document.getElementById("tower2" + nearestTower.id.slice(5)).children.length > 0){
+          if (document.getElementById("tower2" + nearestTower.id.slice(5)).children[document.getElementById("tower2" + nearestTower.id.slice(5)).children.length - 1].id.slice(4) > draggedDisk.id.slice(4)){
+            document.getElementById("tower2" + nearestTower.id.slice(5)).appendChild(draggedDisk);
+          }
+          else{
+            document.getElementById("tower" + draggedDiskTower).appendChild(draggedDisk);
+          }
+        }
+        else{
+          document.getElementById("tower2" + nearestTower.id.slice(5)).appendChild(draggedDisk);
+        }
+        
 
         // Reset draggedDisk
         draggedDisk = null;
+        draggedDiskTower = 0;
+
+        checkTowers();
     }
+}
+
+function checkTowers(){
+
+  let towers = document.getElementsByClassName('container3');
+  if (towers[2].children.length == disknum){
+    console.log("winek")
+  }
+  
+
 }
 
 /*
