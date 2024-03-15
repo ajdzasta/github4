@@ -409,15 +409,19 @@ a {
 .wrapper{
     display: flex;
     justify-content: center;
+    margin-left: -10px;
+    margin-right: -10px;
 }
 .wrapper2{
     display: flex;
     justify-content: center;
+    margin-left: -10px;
+    margin-right: -10px;
 }
 .container2{
     width: min(200px, 30vw);
     height: min(200px, 30vw);
-    margin: min(20px, 2vw);
+    margin: min(20px, 1.6vw);
 }
 .container3{
     display: flex;
@@ -425,7 +429,7 @@ a {
     align-items: center;
     width: min(200px, 30vw);
     height: min(200px, 30vw);
-    margin: min(20px, 2vw);
+    margin: min(20px, 1.6vw);
 }
 
 

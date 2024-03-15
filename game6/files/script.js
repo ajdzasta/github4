@@ -150,7 +150,7 @@ let offsetX = 0;
 let offsetY = 0;
 let draggedDisk = null; // Declare draggedDisk globally
 let draggedDiskTower = 0;
-var disknum = 5;
+var disknum = 6;
 
 IntitDisc(disknum)
 
