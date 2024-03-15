@@ -73,6 +73,32 @@ body {
     background-color: #23003c
 }
 
+.container .box .startinfo .levelbuttons .level {
+    width: 90%;
+    margin-bottom: 20px;
+    margin-right: 3%;
+    margin-left: 3%;
+    display: flex;
+    border: none ;
+    background-color: #0f0028;
+    padding: 15px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+    justify-content: space-around;
+    transition: all .2s
+}
+
+.container .box .startinfo .levelbuttons .level:hover {
+    background-color: #23003c
+}
+
+.container .box .startinfo .levelbuttons {
+    display: flex;
+}
+
 .container .box .hackInfo {
     font-size: 20px;
     display: flex;
@@ -367,23 +393,6 @@ a .home:hover {
     font-size: 13px;
     text-align: left;
     justify-content: space-around;
-}
-
-table {
-    font: bold 15px Bodoni;
-}
-p {
-    font: normal 13px Bodoni, Garamond;
-}
-
-select {
-    font: normal 14px Bodoni, Bodoni;
-}
-select {
-    width: 40px;
-}
-a {
-    font-weight: bold;
 }
 
 .towervert {

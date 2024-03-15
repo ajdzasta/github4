@@ -29,6 +29,15 @@
 					<h2 id="timer"></h2>
 				</div>
 
+				<div class="startinfo" >
+					<p style="margin: 0px 60px 20px 60px;color: #fff;text-align: center;">Wybierz poziom trudności</p>
+					<div class="levelbuttons">
+						<div class="level" id="easy" onclick="level('easy')">łatwy</div>
+						<div class="level" id="normal" onclick="level('normal')" style="border: 1px solid rgba(105, 105, 105, 0.5)">normalny</div>
+						<div class="level" id="hard" onclick="level('hard')">trudny</div>
+					</div>	
+				</div>
+
 				<div class="resultscreen" style="display: none; text-align: center;">
 					<h1>Koniec gry!</h1>
 					<br></br>
@@ -61,7 +70,7 @@
 						<div id="disk5" class="disk" style="display: none; height: min(20px, calc(20*0.2vw)); width: min(130px, calc(130*0.18vw)); background-color: #F675A8; border-radius: 10px;" ontouchstart="initializeDrag(this,event)" onmousedown="initializeDrag(this,event)" title="Disk 5"></div>
 						<div id="disk6" class="disk" style="display: none; height: min(20px, calc(20*0.2vw)); width: min(150px, calc(150*0.18vw)); background-color: #FD8A8A; border-radius: 10px;" ontouchstart="initializeDrag(this,event)" onmousedown="initializeDrag(this,event)" title="Disk 6"></div>
 						<div id="disk7" class="disk" style="display: none; height: min(20px, calc(20*0.2vw)); width: min(170px, calc(170*0.18vw)); background-color: #F4B183; border-radius: 10px;" ontouchstart="initializeDrag(this,event)" onmousedown="initializeDrag(this,event)" title="Disk 7"></div>
-						<div id="disk8" class="disk" style="display: none; height: 20px; width: 190px; background-color: #FFD966; border-radius: 10px;" ontouchstart="initializeDrag(this,event)" onmousedown="initializeDrag(this,event)" title="Disk 8"></div>
+						<div id="disk8" class="disk" style="display: none; height: min(20px, calc(20*0.2vw)); width: min(190px, calc(190*0.18vw)); background-color: #FFD966; border-radius: 10px;" ontouchstart="initializeDrag(this,event)" onmousedown="initializeDrag(this,event)" title="Disk 8"></div>
 				</div>
 				<div class="wrapper2" style="display: none; margin-top: calc(calc(-1*(min(200px, 30vw) + 2*min(20px, 1.6vw))) + 2px);">
 					<div id="tower21" class="container3" onmousemove="indexTo=1"></div>

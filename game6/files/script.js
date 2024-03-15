@@ -5,7 +5,6 @@ const hackInfo = document.querySelector('.hackInfo');
 const textInfo = document.getElementById('textInfo');
 const progressBarId = document.getElementById('progress-bar');
 const resaultend = document.getElementById('resaultend');
-const symbol = document.getElementById('symbol');
 const resultscreen = document.querySelector(".resultscreen");
 const clearButton = document.getElementById("clear");
 const confirmButton = document.getElementById("confirm");
@@ -13,15 +12,21 @@ const container2 = document.getElementById("container2");
 const wrapper = document.querySelector(".wrapper");
 const wrapper2 = document.querySelector(".wrapper2");
 const buttons = document.querySelector(".buttons");
-const inputs = document.querySelectorAll('.input');
-const operators = document.querySelectorAll('.op');
+const startinfo = document.querySelector(".startinfo")
 
 let vh = window.innerHeight;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-var __timePlay = 900;
+var __timePlay = 240;
 var progressBarInterval;
 var check = false;
+var difficulty = "normal";
+
+const hanoi_dif = {
+	easy: 3,
+	normal: 4,
+	hard: 6
+}
 
 const gameInit = () => {
 
@@ -32,9 +37,12 @@ const gameInit = () => {
 	});
 
 	buttonStart.addEventListener('click', () => {
+    ClearDisc();
+    disknum = hanoi_dif[difficulty];
 		gameStart();
 		//Generate();
 		//Clear();
+    
 	});
 
 	resultscreen.style.display = 'none';
@@ -54,6 +62,7 @@ const gameStart = () => {
 	hackInfo.style.display = 'block';
 	textInfo.innerHTML = 'Przygotuj sie...';
 	resultscreen.style.display = 'none';
+  startinfo.style.display = 'none';
 	progressBarStart('start', 2);
 };
 
@@ -66,7 +75,21 @@ const gameWin = async() => {
 	buttons.style.display = 'none';
 	hackText.style.display = 'none';
 	resultscreen.style.display = 'none';
+  startinfo.style.display = 'none';
 	document.getElementById("endInfo").innerHTML = "Otrzymane punkty: 10 pkt";
+
+	progressBarStart('end', 2);
+};
+
+const gameOver = async() => {
+	check = false;
+	hackInfo.style.display = 'block';
+	textInfo.innerHTML = 'Zadanie nieudane!';
+	wrapper.style.display = 'none';
+	buttons.style.display = 'none';
+	hackText.style.display = 'none';
+	resultscreen.style.display = 'none';
+	document.getElementById("endInfo").innerHTML = "Otrzymane punkty: 0 pkt";
 
 	progressBarStart('end', 2);
 };
@@ -113,6 +136,7 @@ function progressBarStart(type, time) {
 				hackText.style.display = '';
 				hackInfo.style.display = 'none';
 				check = true;
+        IntitDisc(disknum);
 				progressBarStart('game', __timePlay);
 				return;
 			}
@@ -123,7 +147,7 @@ function progressBarStart(type, time) {
 				buttons.style.display = 'none';
 				hackInfo.style.display = 'block';
 				hackText.style.display = 'none';
-				//gameOver();
+				gameOver();
 				return;
 			}
 
@@ -136,6 +160,7 @@ function progressBarStart(type, time) {
 				progressBar.style.display = 'none';
 				hackInfo.style.display = 'none';
 				resultscreen.style.display = '';
+        startinfo.style.display = '';
 			}
 		}
 	};
@@ -152,12 +177,18 @@ let draggedDisk = null; // Declare draggedDisk globally
 let draggedDiskTower = 0;
 var disknum = 6;
 
-IntitDisc(disknum)
 
 function IntitDisc(disknum){
   for (let i = disknum; i > 0; i--){
     document.getElementById("tower21").appendChild(document.getElementById("disk" + i));
     document.getElementById("disk" + i).style.display = "block";
+  }
+}
+
+function ClearDisc(){
+  for (let i = 1; i < 9; i++){
+    document.getElementById("disk" + i).style.display = "none";
+    document.getElementsByClassName("wrapper")[0].appendChild(document.getElementById("disk" + i));
   }
 }
 
@@ -297,10 +328,17 @@ function checkTowers(){
 
   let towers = document.getElementsByClassName('container3');
   if (towers[2].children.length == disknum){
-    console.log("winek")
+    gameWin();
   }
-  
+}
 
+function level(id){
+	document.getElementById("easy").style.border = "none";
+	document.getElementById("normal").style.border = "none";
+	document.getElementById("hard").style.border = "none";
+
+	document.getElementById(id).style.border = "1px solid rgba(105, 105, 105, 0.5)";
+	difficulty = id;
 }
 
 /*
